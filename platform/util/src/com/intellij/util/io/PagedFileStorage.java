@@ -26,7 +26,6 @@ import jsr166e.extra.SequenceLock;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sun.misc.VM;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,7 +54,7 @@ public class PagedFileStorage implements Forceable {
     final int upper = SystemInfo.is64Bit && !PersistentEnumeratorDelegate.useBtree() ? 500 : 200;
 
     BUFFER_SIZE = Math.max(1, SystemProperties.getIntProperty("idea.paged.storage.page.size", 10)) * MB;
-    final long max = VM.maxDirectMemory() - 2 * BUFFER_SIZE;
+    final long max = DirectMemoryUtil.getDirectMemorySize() - 2 * BUFFER_SIZE;
     LOWER_LIMIT = (int)Math.min(lower * MB, max);
     UPPER_LIMIT = (int)Math.min(Math.max(LOWER_LIMIT, SystemProperties.getIntProperty("idea.max.paged.storage.cache", upper) * MB), max);
 
