@@ -23,7 +23,6 @@ import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.lang.UrlClassLoader;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sun.misc.CompoundEnumeration;
 
 import java.io.File;
 import java.io.IOException;
