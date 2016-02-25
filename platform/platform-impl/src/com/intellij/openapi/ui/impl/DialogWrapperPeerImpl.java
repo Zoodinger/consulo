@@ -58,7 +58,7 @@ import com.intellij.util.ui.UIUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sun.swing.SwingUtilities2;
+import org.mustbe.consulo.util.ui.AAUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -961,7 +961,7 @@ public class DialogWrapperPeerImpl extends DialogWrapperPeer implements FocusTra
             myOpened = true;
             final DialogWrapper activeWrapper = getActiveWrapper();
             for (JComponent c : UIUtil.uiTraverser(e.getWindow()).filter(JComponent.class)) {
-              c.putClientProperty(SwingUtilities2.AA_TEXT_PROPERTY_KEY, AntialiasingType.getAAHintForSwingComponent());
+              AAUtil.putAAInfo(c, AntialiasingType.getAAHintForSwingComponent());
             }
             if (activeWrapper == null) {
               myFocusedCallback.setRejected();

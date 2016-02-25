@@ -19,7 +19,7 @@ import com.intellij.openapi.ui.GraphicsConfig;
 import com.intellij.ui.Gray;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
-import sun.swing.SwingUtilities2;
+import org.mustbe.consulo.util.ui.XSwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
@@ -59,7 +59,7 @@ public class ModernCheckBoxUI extends BasicCheckBoxUI {
     final Font font = c.getFont();
 
     g.setFont(font);
-    FontMetrics fm = SwingUtilities2.getFontMetrics(c, g, font);
+    FontMetrics fm = XSwingUtilities2.getFontMetrics(c, g, font);
 
     Rectangle viewRect = new Rectangle(size);
     Rectangle iconRect = new Rectangle();
@@ -139,7 +139,7 @@ public class ModernCheckBoxUI extends BasicCheckBoxUI {
       }
       else {
         g.setColor(model.isEnabled() ? b.getForeground() : UIManager.getColor("CheckBox.disabledText"));
-        SwingUtilities2.drawStringUnderlineCharAt(c, g, text, b.getDisplayedMnemonicIndex(), textRect.x, textRect.y + fm.getAscent());
+        XSwingUtilities2.drawStringUnderlineCharAt(c, g, text, b.getDisplayedMnemonicIndex(), textRect.x, textRect.y + fm.getAscent());
       }
     }
   }

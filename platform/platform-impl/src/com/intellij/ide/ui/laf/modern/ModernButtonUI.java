@@ -19,7 +19,7 @@ import com.intellij.openapi.ui.GraphicsConfig;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.util.ui.GraphicsUtil;
 import com.intellij.util.ui.JBUI;
-import sun.swing.SwingUtilities2;
+import org.mustbe.consulo.util.ui.XSwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -104,21 +104,21 @@ public class ModernButtonUI extends BasicButtonUI {
     }
     g.setColor(fg);
 
-    FontMetrics metrics = SwingUtilities2.getFontMetrics(c, g);
+    FontMetrics metrics = XSwingUtilities2.getFontMetrics(c, g);
     int mnemonicIndex = button.getDisplayedMnemonicIndex();
     if (model.isEnabled()) {
 
-      SwingUtilities2
+      XSwingUtilities2
               .drawStringUnderlineCharAt(c, g, text, mnemonicIndex, textRect.x + getTextShiftOffset(), textRect.y + metrics.getAscent() + getTextShiftOffset());
     }
     else {
       g.setColor(UIManager.getColor("Button.darcula.disabledText.shadow"));
-      SwingUtilities2
+      XSwingUtilities2
               .drawStringUnderlineCharAt(c, g, text, -1, textRect.x + getTextShiftOffset() + 1, textRect.y + metrics.getAscent() + getTextShiftOffset() + 1);
 
       if(!ModernButtonBorderPainter.isDefaultButton(button)) {
         g.setColor(UIManager.getColor("Button.disabledText"));
-        SwingUtilities2.drawStringUnderlineCharAt(c, g, text, -1, textRect.x + getTextShiftOffset(), textRect.y + metrics.getAscent() + getTextShiftOffset());
+        XSwingUtilities2.drawStringUnderlineCharAt(c, g, text, -1, textRect.x + getTextShiftOffset(), textRect.y + metrics.getAscent() + getTextShiftOffset());
       }
     }
   }

@@ -31,7 +31,7 @@ import com.intellij.util.ui.UIUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mustbe.consulo.RequiredDispatchThread;
-import sun.swing.SwingUtilities2;
+import org.mustbe.consulo.util.ui.AAUtil;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -58,7 +58,7 @@ public class AppearanceConfigurable implements SearchableConfigurable {
   }
 
   private void initComponent() {
-    if (myComponent == null)  {
+    if (myComponent == null) {
       myComponent = new MyComponent();
     }
   }
@@ -110,8 +110,7 @@ public class AppearanceConfigurable implements SearchableConfigurable {
     });
 
     myComponent.myAlphaModeRatioSlider.setSize(100, 50);
-    @SuppressWarnings({"UseOfObsoleteCollectionType"})
-    Dictionary<Integer, JLabel> dictionary = new Hashtable<Integer, JLabel>();
+    @SuppressWarnings({"UseOfObsoleteCollectionType"}) Dictionary<Integer, JLabel> dictionary = new Hashtable<Integer, JLabel>();
     dictionary.put(new Integer(0), new JLabel("0%"));
     dictionary.put(new Integer(50), new JLabel("50%"));
     dictionary.put(new Integer(100), new JLabel("100%"));
@@ -159,7 +158,7 @@ public class AppearanceConfigurable implements SearchableConfigurable {
       settings.IDE_AA_TYPE = (AntialiasingType)myComponent.myAntialiasingInIDE.getSelectedItem();
       for (Window w : Window.getWindows()) {
         for (JComponent c : UIUtil.uiTraverser(w).filter(JComponent.class)) {
-          c.putClientProperty(SwingUtilities2.AA_TEXT_PROPERTY_KEY, AntialiasingType.getAAHintForSwingComponent());
+          AAUtil.putAAInfo(c, AntialiasingType.getAAHintForSwingComponent());
         }
       }
       shouldUpdateUI = true;
@@ -222,7 +221,7 @@ public class AppearanceConfigurable implements SearchableConfigurable {
         lafManager.setCurrentLookAndFeel(lafInfo);
       }
 
-      if(lafInfo instanceof LafWithColorScheme) {
+      if (lafInfo instanceof LafWithColorScheme) {
         EditorColorsManager editorColorsManager = EditorColorsManager.getInstance();
         EditorColorsScheme editorColorsScheme = editorColorsManager.getScheme(((LafWithColorScheme)lafInfo).getColorSchemeName());
         if (editorColorsScheme != null) {
@@ -390,7 +389,7 @@ public class AppearanceConfigurable implements SearchableConfigurable {
     }
     int tooltipDelay = -1;
     tooltipDelay = myComponent.myInitialTooltipDelaySlider.getValue();
-    isModified |=  tooltipDelay != Registry.intValue("ide.tooltip.initialDelay");
+    isModified |= tooltipDelay != Registry.intValue("ide.tooltip.initialDelay");
 
     return isModified;
   }
@@ -444,7 +443,7 @@ public class AppearanceConfigurable implements SearchableConfigurable {
     private JComboBox myAntialiasingInEditor;
 
     public MyComponent() {
-      myOverrideLAFFonts.addActionListener( new ActionListener() {
+      myOverrideLAFFonts.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
           updateCombo();
@@ -481,10 +480,8 @@ public class AppearanceConfigurable implements SearchableConfigurable {
   }
 
   private static class AAListCellRenderer extends ListCellRendererWrapper<AntialiasingType> {
-    private static final SwingUtilities2.AATextInfo SUBPIXEL_HINT = new SwingUtilities2.AATextInfo(
-            RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB, UIUtil.getLcdContrastValue());
-    private static final SwingUtilities2.AATextInfo GREYSCALE_HINT = new SwingUtilities2.AATextInfo(
-            RenderingHints.VALUE_TEXT_ANTIALIAS_ON, UIUtil.getLcdContrastValue());
+    private static final AAUtil.AATextInfo SUBPIXEL_HINT = new AAUtil.AATextInfo(RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB, UIUtil.getLcdContrastValue());
+    private static final AAUtil.AATextInfo GREYSCALE_HINT = new AAUtil.AATextInfo(RenderingHints.VALUE_TEXT_ANTIALIAS_ON, UIUtil.getLcdContrastValue());
 
     private final boolean useEditorAASettings;
 
@@ -496,13 +493,13 @@ public class AppearanceConfigurable implements SearchableConfigurable {
     @Override
     public void customize(JList list, AntialiasingType value, int index, boolean selected, boolean hasFocus) {
       if (value == AntialiasingType.SUBPIXEL) {
-        setClientProperty(SwingUtilities2.AA_TEXT_PROPERTY_KEY, SUBPIXEL_HINT);
+        AAUtil.putAAInfo(this, SUBPIXEL_HINT);
       }
       else if (value == AntialiasingType.GREYSCALE) {
-        setClientProperty(SwingUtilities2.AA_TEXT_PROPERTY_KEY, GREYSCALE_HINT);
+        AAUtil.putAAInfo(this, GREYSCALE_HINT);
       }
       else if (value == AntialiasingType.OFF) {
-        setClientProperty(SwingUtilities2.AA_TEXT_PROPERTY_KEY, null);
+        AAUtil.putAAInfo(this, null);
       }
 
       if (useEditorAASettings) {

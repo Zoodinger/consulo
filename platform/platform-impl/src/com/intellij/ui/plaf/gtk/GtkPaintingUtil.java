@@ -16,7 +16,7 @@
 package com.intellij.ui.plaf.gtk;
 
 import com.intellij.util.ui.UIUtil;
-import sun.swing.SwingUtilities2;
+import org.mustbe.consulo.util.ui.XSwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.plaf.MenuItemUI;
@@ -43,16 +43,16 @@ public class GtkPaintingUtil {
                                        final JMenuItem menuItem,
                                        final Rectangle textRect,
                                        final String text) {
-    final FontMetrics fm = SwingUtilities2.getFontMetrics(menuItem, g);
+    final FontMetrics fm = XSwingUtilities2.getFontMetrics(menuItem, g);
     final int index = menuItem.getDisplayedMnemonicIndex();
 
     final Color fg = getForeground(originalUI, menuItem);
     final Color shadow = UIUtil.shade(menuItem.getBackground(), 1.24, 0.5);
 
     g.setColor(shadow);
-    SwingUtilities2.drawStringUnderlineCharAt(menuItem, g, text, index, textRect.x + 1, textRect.y + fm.getAscent() + 1);
+    XSwingUtilities2.drawStringUnderlineCharAt(menuItem, g, text, index, textRect.x + 1, textRect.y + fm.getAscent() + 1);
     g.setColor(fg);
-    SwingUtilities2.drawStringUnderlineCharAt(menuItem, g, text, index, textRect.x, textRect.y + fm.getAscent());
+    XSwingUtilities2.drawStringUnderlineCharAt(menuItem, g, text, index, textRect.x, textRect.y + fm.getAscent());
   }
 
   public static boolean isSynthUI(final MenuItemUI ui) {

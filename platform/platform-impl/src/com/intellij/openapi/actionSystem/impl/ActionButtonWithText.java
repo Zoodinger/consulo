@@ -20,7 +20,7 @@ import com.intellij.openapi.actionSystem.ex.ActionButtonLook;
 import com.intellij.util.ui.EmptyIcon;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
-import sun.swing.SwingUtilities2;
+import org.mustbe.consulo.util.ui.XSwingUtilities2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,7 +51,7 @@ public class ActionButtonWithText extends ActionButton {
   @Override
   public void paintComponent(Graphics g) {
     Icon icon = getIcon();
-    FontMetrics fm = SwingUtilities2.getFontMetrics(this, g, getFont());
+    FontMetrics fm = XSwingUtilities2.getFontMetrics(this, g, getFont());
     Rectangle viewRect = new Rectangle(getSize());
     Insets i = getInsets();
     viewRect.x += i.left;
@@ -72,7 +72,7 @@ public class ActionButtonWithText extends ActionButton {
 
     UIUtil.applyRenderingHints(g);
     g.setColor(isButtonEnabled() ? getForeground() : UIUtil.getInactiveTextColor());
-    SwingUtilities2.drawStringUnderlineCharAt(this, g, text,
+    XSwingUtilities2.drawStringUnderlineCharAt(this, g, text,
                                               getMnemonicCharIndex(text),
                                               textRect.x,
                                               textRect.y + fm.getAscent());

@@ -17,7 +17,7 @@ package com.intellij.ide.ui.laf.modern;
 
 import com.intellij.util.ui.GraphicsUtil;
 import com.intellij.util.ui.JBUI;
-import sun.swing.SwingUtilities2;
+import org.mustbe.consulo.util.ui.XSwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
@@ -148,20 +148,20 @@ public class ModernProgressBarUI extends BasicProgressBarUI {
 
     if (progressBar.getOrientation() == JProgressBar.HORIZONTAL) {
       g2.setColor(getSelectionBackground());
-      SwingUtilities2.drawString(progressBar, g2, progressString, renderLocation.x, renderLocation.y);
+      XSwingUtilities2.drawString(progressBar, g2, progressString, renderLocation.x, renderLocation.y);
       g2.setColor(getSelectionForeground());
       g2.clipRect(fillStart, y, amountFull, h);
-      SwingUtilities2.drawString(progressBar, g2, progressString, renderLocation.x, renderLocation.y);
+      XSwingUtilities2.drawString(progressBar, g2, progressString, renderLocation.x, renderLocation.y);
     }
     else { // VERTICAL
       g2.setColor(getSelectionBackground());
       AffineTransform rotate = AffineTransform.getRotateInstance(Math.PI / 2);
       g2.setFont(progressBar.getFont().deriveFont(rotate));
       renderLocation = getStringPlacement(g2, progressString, x, y, w, h);
-      SwingUtilities2.drawString(progressBar, g2, progressString, renderLocation.x, renderLocation.y);
+      XSwingUtilities2.drawString(progressBar, g2, progressString, renderLocation.x, renderLocation.y);
       g2.setColor(getSelectionForeground());
       g2.clipRect(x, fillStart, w, amountFull);
-      SwingUtilities2.drawString(progressBar, g2, progressString, renderLocation.x, renderLocation.y);
+      XSwingUtilities2.drawString(progressBar, g2, progressString, renderLocation.x, renderLocation.y);
     }
     g2.setClip(oldClip);
   }

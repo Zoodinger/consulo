@@ -18,7 +18,7 @@ package com.intellij.ide.ui.laf.modern;
 import com.intellij.openapi.ui.GraphicsConfig;
 import com.intellij.util.ui.GraphicsUtil;
 import com.intellij.util.ui.JBUI;
-import sun.swing.SwingUtilities2;
+import org.mustbe.consulo.util.ui.XSwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
@@ -55,7 +55,7 @@ public class ModernRadioButtonUI extends BasicRadioButtonUI {
     Dimension size = c.getSize();
     Font f = c.getFont();
     g.setFont(f);
-    FontMetrics fm = SwingUtilities2.getFontMetrics(c, g, f);
+    FontMetrics fm = XSwingUtilities2.getFontMetrics(c, g, f);
 
     Rectangle viewRect = new Rectangle(size);
     Rectangle iconRect = new Rectangle();
@@ -126,7 +126,7 @@ public class ModernRadioButtonUI extends BasicRadioButtonUI {
           // *** paint the text disabled
           g.setColor(UIManager.getColor("RadioButton.disabledText"));
         }
-        SwingUtilities2.drawStringUnderlineCharAt(c, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
+        XSwingUtilities2.drawStringUnderlineCharAt(c, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
       }
     }
   }

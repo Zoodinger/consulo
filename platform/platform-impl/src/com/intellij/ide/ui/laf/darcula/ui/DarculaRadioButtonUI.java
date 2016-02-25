@@ -23,7 +23,7 @@ import com.intellij.ui.Gray;
 import com.intellij.util.ui.GraphicsUtil;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
-import sun.swing.SwingUtilities2;
+import org.mustbe.consulo.util.ui.XSwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
@@ -51,7 +51,7 @@ public class DarculaRadioButtonUI extends MetalRadioButtonUI {
     Dimension size = c.getSize();
     Font f = c.getFont();
     g.setFont(f);
-    FontMetrics fm = SwingUtilities2.getFontMetrics(c, g, f);
+    FontMetrics fm = XSwingUtilities2.getFontMetrics(c, g, f);
 
     Rectangle viewRect = new Rectangle(size);
     Rectangle iconRect = new Rectangle();
@@ -134,7 +134,7 @@ public class DarculaRadioButtonUI extends MetalRadioButtonUI {
           // *** paint the text disabled
           g.setColor(getDisabledTextColor());
         }
-        SwingUtilities2.drawStringUnderlineCharAt(c, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
+        XSwingUtilities2.drawStringUnderlineCharAt(c, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
       }
     }
   }
