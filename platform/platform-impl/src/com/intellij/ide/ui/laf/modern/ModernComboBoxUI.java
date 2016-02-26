@@ -19,7 +19,6 @@ import com.intellij.openapi.ui.GraphicsConfig;
 import com.intellij.util.ui.GraphicsUtil;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
-import sun.swing.DefaultLookup;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -237,8 +236,8 @@ public class ModernComboBoxUI extends BasicComboBoxUI implements Border {
         c.setBackground(comboBox.getBackground());
       }
       else {
-        c.setForeground(DefaultLookup.getColor(comboBox, this, "ComboBox.disabledForeground", null));
-        c.setBackground(DefaultLookup.getColor(comboBox, this, "ComboBox.disabledBackground", null));
+        c.setForeground(UIManager.getColor("ComboBox.disabledForeground"));
+        c.setBackground(UIManager.getColor("ComboBox.disabledBackground"));
       }
     }
 

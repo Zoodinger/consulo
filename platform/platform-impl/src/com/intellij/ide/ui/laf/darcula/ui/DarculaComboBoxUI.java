@@ -18,9 +18,9 @@ package com.intellij.ide.ui.laf.darcula.ui;
 import com.intellij.ide.ui.laf.darcula.DarculaUIUtil;
 import com.intellij.openapi.ui.GraphicsConfig;
 import com.intellij.ui.Gray;
+import com.intellij.util.ObjectUtil;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
-import sun.swing.DefaultLookup;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -238,7 +238,7 @@ public class DarculaComboBoxUI extends BasicComboBoxUI implements Border {
     }
     c.setFont(comboBox.getFont());
     if (hasFocus && !isPopupVisible(comboBox)) {
-      c.setForeground(DefaultLookup.getColor(comboBox, this, "ComboBox.selectionForeground", listBox.getSelectionForeground()));
+      c.setForeground(ObjectUtil.chooseNotNull(UIManager.getColor("ComboBox.selectionForeground"), listBox.getSelectionForeground()));
       c.setBackground(comboBox.getBackground());
     }
     else {
@@ -247,8 +247,8 @@ public class DarculaComboBoxUI extends BasicComboBoxUI implements Border {
         c.setBackground(comboBox.getBackground());
       }
       else {
-        c.setForeground(DefaultLookup.getColor(comboBox, this, "ComboBox.disabledForeground", null));
-        c.setBackground(DefaultLookup.getColor(comboBox, this, "ComboBox.disabledBackground", null));
+        c.setForeground(UIManager.getColor("ComboBox.disabledForeground"));
+        c.setBackground(UIManager.getColor("ComboBox.disabledBackground"));
       }
     }
 
